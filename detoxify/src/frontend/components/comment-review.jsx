@@ -33,6 +33,7 @@ export const CommentReview = ({ commentIndex, accountId, pageId, content, refres
       });
   }, [pageId, content])
 
+
   return (
     <Box xcss={commentContainerStyles}>
       <Text><Strong>In page {page?.title}</Strong></Text>
@@ -45,8 +46,10 @@ export const CommentReview = ({ commentIndex, accountId, pageId, content, refres
         <Button appearance="primary" onClick={() => {
           invoke('approveComment', {
             commentIndex: commentIndex
-          });
-          refreshCommentList();
+          })
+          .then(() => {
+            refreshCommentList();
+          })
         }}>
           Not toxic
         </Button>
@@ -56,8 +59,10 @@ export const CommentReview = ({ commentIndex, accountId, pageId, content, refres
             accountId,
             pageId,
             content
-          });
-          refreshCommentList();
+          })
+          .then(() => {
+            refreshCommentList();
+          })
         }}>
           Warn User
         </Button>

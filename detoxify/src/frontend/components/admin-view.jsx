@@ -80,7 +80,7 @@ export const AdminView = () => {
 
       <Box padding='space.250'>
         <Heading as='h2'>Flagged & Pending Comments</Heading>
-        {(toxicComments && toxicComments.length != 0) 
+        {(refresh >=0 && toxicComments && toxicComments.length != 0) 
           ? toxicComments.map((comment) => 
             <CommentReview accountId={comment.value.accountId} pageId={comment.value.pageId} content={comment.value.content} commentIndex={comment.value.commentIndex} refreshCommentList={refreshComponent} />
           ) 

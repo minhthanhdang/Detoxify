@@ -65,6 +65,11 @@ resolver.define('getIncludedPages', async ({payload, context}) => {
 })
 
 resolver.define('addPages', async ({payload, context}) => {
+  const adminId = context.accountId;
+  const admin = await isAdmin(adminId);
+  if (!admin) {
+    return [];
+  }
   console.log("Invoking addPages with payload: ", payload);
   const includedPages = await storage.get('includedPages');
 
@@ -79,6 +84,11 @@ resolver.define('addPages', async ({payload, context}) => {
 })
 
 resolver.define('removePages', async ({payload, context}) => {
+  const adminId = context.accountId;
+  const admin = await isAdmin(adminId);
+  if (!admin) {
+    return [];
+  }
   console.log("Invoking removePages with payload: ", payload);
   const includedPages = await storage.get('includedPages');
   const newPages = includedPages.filter((page) => !payload.pages.includes(page));
@@ -87,6 +97,11 @@ resolver.define('removePages', async ({payload, context}) => {
 })
 
 resolver.define('getExcludedPages', async ({payload, context}) => {
+  const adminId = context.accountId;
+  const admin = await isAdmin(adminId);
+  if (!admin) {
+    return [];
+  }
   const allPages = await getPages();
   const temp = allPages?.results;
 
@@ -107,11 +122,21 @@ resolver.define('getExcludedPages', async ({payload, context}) => {
 
 
 resolver.define('removeAllPages', async ({payload, context}) => {
+  const adminId = context.accountId;
+  const admin = await isAdmin(adminId);
+  if (!admin) {
+    return [];
+  }
   await storage.set('includedPages', []);
   return;
 })
 
 resolver.define('getAllToxicComments', async ({payload, context}) => {
+  const adminId = context.accountId;
+  const admin = await isAdmin(adminId);
+  if (!admin) {
+    return [];
+  }
   const allComments = await storage.entity('toxic-confluence-comment').query().index('confirmed').where(WhereConditions.equalsTo(false)).getMany();
 
   const results = allComments?.results;
@@ -121,6 +146,11 @@ resolver.define('getAllToxicComments', async ({payload, context}) => {
 })
 
 resolver.define('approveComment', async ({payload, context}) => {
+  const adminId = context.accountId;
+  const admin = await isAdmin(adminId);
+  if (!admin) {
+    return [];
+  }
   const commentIndex = payload.commentIndex;
 
   await storage.entity('toxic-confluence-comment').delete(commentIndex.toString());
@@ -129,6 +159,11 @@ resolver.define('approveComment', async ({payload, context}) => {
 })
 
 resolver.define('warnUser', async ({payload, context}) => {
+  const adminId = context.accountId;
+  const admin = await isAdmin(adminId);
+  if (!admin) {
+    return [];
+  }
 
   const commentIndex = payload.commentIndex;
 
