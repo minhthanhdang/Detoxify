@@ -7,11 +7,17 @@
 ### Table of content
 
 **[1) Introduction](#introduction)**
+
 **[2) Features](#features)**
+
 **[3) Installation & Configuration](#installation--configuration)**
+
 **[4) Usage](#usage)**
+
 **[5) App Logic](#app-logic)**
+
 **[6) About our AI model](#about-our-ai-model)**
+
 **[7) Final words](#final-words)**
 
 
