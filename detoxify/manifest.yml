@@ -1,0 +1,71 @@
+modules:
+  confluence:globalSettings:
+    - key: detoxify-settings
+      resource: global-settings-page
+      render: native
+      resolver:
+        function: settings-resolver
+      title: Detoxify Global Settings
+      route: detoxify-settings
+  confluence:globalPage:
+    - key: detoxify
+      resource: main
+      render: native
+      resolver:
+        function: resolver
+      title: Detoxify for Confluence
+      route: detoxify
+  trigger:
+    - key: confluence-comment-created
+      function: confluence-trigger
+      events:
+        - avi:confluence:created:comment
+
+  function:
+    - key: resolver
+      handler: index.handler
+    - key: confluence-trigger
+      handler: index.confluenceTrigger
+    - key: settings-resolver
+      handler: index.confluenceGlobalSettingsHandler
+
+resources:
+  - key: main
+    path: src/frontend/confluence-app/index.jsx
+  - key: global-settings-page
+    path: src/frontend/global-settings-page/index.jsx
+app:
+  runtime:
+    name: nodejs20.x
+  id: ari:cloud:ecosystem::app/741851e5-fe02-4b74-87d2-e420f64649b5
+  storage:
+    entities:
+      - name: toxic-confluence-comment
+        attributes:
+          commentIndex:
+            type: integer
+          accountId:
+            type: string
+          pageId:
+            type: string
+          content:
+            type: string
+          confirmed:
+            type: boolean
+        indexes:
+          - commentIndex
+          - accountId
+          - confirmed
+
+permissions:
+  scopes:
+    - storage:app
+    - read:page:confluence
+    - read:confluence-user
+    - read:confluence-content.summary
+    - read:comment:confluence
+    - delete:comment:confluence
+  external:
+    fetch:
+      backend:
+        - 'https://i4rells089.execute-api.us-east-1.amazonaws.com/test1/*'
