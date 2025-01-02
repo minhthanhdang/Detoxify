@@ -99,7 +99,7 @@ We deployed the AI Model on **AWS** using ```EFS```, ```Lambda```, and ```API Ga
 </div>
 
 ##### 4. Try it yourself!
-Download the model state dict [here](https://drive.google.com/file/d/1MTtqHVIz65AIKMUkCsfDA1OJxQxa-s-A/view?usp=drive_link), and run the model [inference notebook](/model/inference.ipynb).
+Download the model state dict [here](https://drive.google.com/file/d/1MTtqHVIz65AIKMUkCsfDA1OJxQxa-s-A/view?usp=drive_link), and run the model [inference notebook](/model/inference.ipynb). Make sure to change the `load_state_dict` directory to where the state dict is saved.
 
 ### Final words
 I sincerely thank the organizers and sponsors of Codegeist 2024, namely Atlassian, AWS, and Devpost, for providing us with this incredible opportunity. I learnt a lot during the journey, about the Atlassian developer platform Forge, the capabilities of many Atlassian products, and about the existing apps running on the platform. Such a great Hackathon experience!
